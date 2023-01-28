@@ -7,6 +7,8 @@ https://www.udemy.com/course/aws-certified-cloud-practitioner-new
 ## Índice
 <!-- TODO:  -->
 
+# 1. Nuvem
+
 ## O que compõem um servidor (slide 13)
 
 - CPU;
@@ -180,3 +182,37 @@ A precificação da AWS possui 3 fundamentos:
   - Violações de segurança;
   - Abuso na rede;
   - Abuso no envio de emails e outras mensagens.
+
+# 2. IAM - Identity and Access Management
+
+## Intro
+
+- Usuários da organização podem ser divididos em grupos;
+- Grupos só contém usuários, não outros grupos;
+- Usuários podem participar de vários grupos;
+- Boa prática: utilizar o princípio "least privilege principle" para as permissões aos usuários:
+  - Não dar mais permissões de que um usuário precisa.
+
+## Root user
+
+- Root User é criado por padrão e não deve ser usado ou compartilhado;
+- Criar um IAM user e colocá-lo em um grupo de Admin, que vai ter os mesmos privilégios do Root e sempre usar ela ao invés do Root;
+
+## MFA - Multi Factor Authentication
+
+- É (muito) recomendado que todos os IAM users tenham autenticação MFA;
+  - Usuários tem acessos aos recursos da AWS e tudo mais, portanto é muito problemático se alguém tiver a conta hackeada.
+- MFA = senha que você conhece + token gerado por device físico;
+- Opções de MFA devices:
+  - Virtual MFA devices:
+    - Google autheticator (Somente celular);
+    - Authy (celular e PC).
+  - Universal 2nd Factor Security key:
+    - Hardware token
+
+## Quais são as opções de acesso a AWS?
+
+- Console da AWS pelo navegador: senha + MFA code para acessar;
+- CLI: chaves de acesso;
+- SDK: chaves de acesso.
+
