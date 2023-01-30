@@ -216,3 +216,57 @@ A precificação da AWS possui 3 fundamentos:
 - CLI: chaves de acesso;
 - SDK: chaves de acesso.
 
+## Comando para configurar AWS cli
+
+```zsh
+aws configure
+```
+
+Usar as chaves de acesso para configurar o ambiente do CLI
+
+## Comando para listar usuários do IAM
+
+```zsh
+aws iam list-users
+```
+
+## Alternativa ao CLI no terminal
+
+- Usar o próprio cloudshell da aws:
+  - https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#5584bdee-f7aa-4dd5-b2e5-6a2363099507
+- Está disponível apenas em [algumas regiões](https://docs.aws.amazon.com/cloudshell/latest/userguide/faq-list.html#regions-available), portanto é necessário mudar para a região correta.
+
+## IAM roles para serviços internos da AWS
+
+- Alguns serviços precisam fazer algumas ações dentro da própria AWS:
+  - Exemplo: uma instância EC2.
+- Para que essas ações sejam possíveis, é preciso setar IAM roles para EC2
+
+## IAM security tools
+
+- IAM Credentials report (account-level):
+  - Um relatório que lista todas as contas dos usuários e seus respectivos status e credenciais;
+  - Acessar o relatório no menu "Credential report" dentro do serviço IAM.
+
+- IAM Access Advisor (user-level):
+  - Mostra as permissões de serviços que foi dada a um usuário;
+  - Essa informação pode ser usada para ver se o usuário está de fato usando todas as permissões que lhe foram dadas. Se ele não estiver usando, faz sentido rever as policies dele;
+  - Pode ser acessado em uma aba dentro de um usuário específico, na tab "Access Advisor".
+
+## IAM melhores práticas
+
+- Nunca use sua conta Root, exceto para criação de uma outra conta normal;
+- Um usuário físico = uma conta de usuário AWS:
+  - Não compartilhar contas, sempre criar uma nova no IAM.
+- Utilizar grupos e permissões para grupos;
+- Senha forte e MFA;
+- Criar roles para dar permissões aos serviços da AWS;
+- Criar access keys para CLI/SDK;
+- Usar o relatório "Credentials report" para auditar as permissões dos usuários;
+- Nunca compartilhar usuários IAM e Access keys.
+
+## Responsabilidade compartilhada
+
+- Em resumo, a AWS é responsável por toda infraestrutura e você é responsavel de como usar essa infraestrutura.
+
+![Alt text](../../assets/shared-responsibility.png "Title")
