@@ -270,3 +270,8 @@ aws iam list-users
 - Em resumo, a AWS é responsável por toda infraestrutura e você é responsavel de como usar essa infraestrutura.
 
 ![Alt text](../../assets/shared-responsibility.png "Title")
+
+# 3. EC2 - Elastic Compute Cloud
+
+- Infrastructure as a Service;
+- Sistemas operacionais disponíveis: Linux, Win, Mac OS;
