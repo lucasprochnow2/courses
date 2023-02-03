@@ -275,3 +275,78 @@ aws iam list-users
 
 - Infrastructure as a Service;
 - Sistemas operacionais disponíveis: Linux, Win, Mac OS;
+
+## Tipos de instâncias
+
+- https://aws.amazon.com/ec2/instance-types/
+- https://instances.vantage.sh/
+
+- Convenção do nome das instâncias:
+  - `m5.2xlarge`:
+    - `m`: Classe da instância;
+    - `5`: Geração do hardware (AWS vai atualizando com o tempo);
+    - `2xlarge`: Tamanho da instância
+
+- Tipos: 
+  - `General purpose`:
+    - Ótima opção para diversos fluxos de trabalho, por exemplo um web server ou repositório de código;
+    - Equilíbrio entre:
+      - Compute, Memory e networking.
+  
+  - `Compute optimized`:
+    - Ótima para tasks que necessitam de alto poder computacional:
+      - Servidor dedicado para games;
+      - Machine learning;
+      - Processamento em batch.
+  
+  - `Memory optimized`:
+    - Alta performance para processar dados em memória (RAM):
+    - Casos de uso:
+      - Banco de dados relacionais/não relacionais;
+      - Cache;
+      - Banco de dados otimizados para BI;
+      - Aplicações que usem processamento em real-time.
+
+  - `Storage optimized`:
+    - Ótimo para armazenar dados sequênciais com leitura e escrita;
+    - Casos de uso:
+      - OLTP systems;
+      - Banco de dados relacionais/não relacionais;
+      - Cache (redis);
+      - Sistema de arquivos distribuídos;
+
+## Security groups
+
+- Serve para controlar o tráfico `in` e `out` das instâncias EC2;
+- Agem como um "firewall" nas instâncias;
+- Possuem apenas regras de permissão (`allow`);
+- Podem ser referenciados por IP ou security groups;
+
+- Eles regulam:
+  - Acesso às portas;
+  - Autoriza o alcance dos IPs - IPv4 e Ipv6;
+  - Controla o tráfico `inbound` (de fora para dentro da instância);
+  - Controla o tráfico `outbound` (de dentro para fora da instância);
+
+- Podem ser atrelados a várias instâncias;
+- São atrelados a uma região ou VPC;
+- Vivem fora da EC2, serviço a parte;
+- É uma boa prática manter um security group por acesso SSH;
+
+- Se a aplicação não estiver acessível por `time out`, provavelmente é um problema com o security group;
+- Se a aplicação retornar um erro `connection refused`, provavelmente é erro na aplicação mesmo;
+
+- Por padrão:
+  - Todo tráfico `inbound` é bloqueado;
+  - Todo tráfico `outbound` é autorizado;
+
+- Diagrama de comunicação entre instâncias usando os mesmos security groups:
+![Security groups communication](../../assets/security-groups.png "Security groups")
+
+- Portas mais comuns:
+  - `22`: SSH (secure shell) - Logar em uma instância Linux;
+  - `21`: FTP (file transfer protocol) - Upload de arquivos para o servidor;
+  - `22`: SFTP (secure file transfer protocol) - Upload de arquivos usando SSH;
+  - `80`: HTTP - Acessar sites não seguros;
+  - `443`: HTTPS - Acessar sites seguros;
+  - `3389`: RDP (Remote desktop protocol) - Logar em uma instância Windows.
