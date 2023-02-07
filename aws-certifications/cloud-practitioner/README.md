@@ -350,3 +350,62 @@ aws iam list-users
   - `80`: HTTP - Acessar sites não seguros;
   - `443`: HTTPS - Acessar sites seguros;
   - `3389`: RDP (Remote desktop protocol) - Logar em uma instância Windows.
+
+## Acessar a EC2 por SSH
+
+- Acessar pelo terminal (linux/macos): `ssh -i {path_to_certificate} ec2-user@{public_ipv4}`
+- Acessar instância pelo browser:
+  - Selecionar a instância EC2 na lista de instâncias dentro do console AWS;
+  - Clicar no botão "connect" logo acima da lista;
+  - Na próxima tela, clicar em "connect" novamente;
+  - Um terminal linux será aberto dentro da instância.
+
+## IAM Roles nas instâncias
+
+- **Importante**: nunca use credenciais pessoais para configurar uma instância EC2 (`aws configure`):
+  - O correto é criar outra IAM role, específica para a instância EC2, e adicioná-la junto a instância.
+
+## Planos de pagamento EC2
+
+- On demand: paga pelo que for usar
+  - Linux ou Windows: cobrança por segundo, após o primeiro minuto;
+  - Outros SOs: cobrança por hora;
+  - Custo mais alto, mas não precisa de pagamento de entrada;
+  - Recomendado para projetos de curto prazo e workloads sem interrupção, quando não como prever como a aplicação irá se comportar;
+ 
+- Reserved Instances:
+  - Aproximadamente 72% mais barato que "On demand";
+  - Reserva atributos específicos da instância (Instance type, region, OS...);
+  - Período de reserva: 1 ano (+ desconto) ou 3 anos (+++ desconto);
+  - Opções de pagamento: No upfront (+), Partial upfront (++) ou all upfront (+++);
+  - Recomendado para aplicações mais estáveis, exemplo: banco de dados.
+
+- Saving plans
+  - Ganha desconto baseado em um plano de longo prazo;
+  - Se compromete com um tipo específico de uso ($10/hour por 1 ou 3 anos);
+  - Usar acima do combinado, vai gerar cobrança extra baseado no plano "On demand";
+
+- Spot instances:
+  - Pode chegar a 90% de desconto;
+  - Corre o risco de perder a instância por conta do preço máximo que vc acordou;
+  - Recomendado para qualquer tipo de aplicação que seja resiliente a falhas:
+    - Não recomendado para apps críticas ou banco de dados.
+
+- Dedicated hosts:
+  - **Servidor físico** com instância EC2 dedicada para uso próprio;
+  - Opções de compra:
+    - On demand;
+    - Reserved: 1 ou 3 anos.
+  - Recomendado para softwares com modelos de licenças próprias ou forte regulação do estado.
+
+- Dedicated instances:
+  - Instância roda no hardware que é dedicado a vc;
+  - Pode compartilhar hardware com outras instâncias da mesma conta;
+
+- Capacity reservations
+  - Reserva de capacidade das instâncias, em uma AZ específica, quando quiser;
+  - Sempre terá acesso a capacidade reservada.
+
+- Analogia dos planos com um resort:
+
+![Alt text](../../assets/ec2-cost-plans.png "Title")
